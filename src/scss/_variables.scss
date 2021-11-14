@@ -1,0 +1,24 @@
+$primary-light: rgb(182, 248, 209);
+$primary-dark: rgb(44, 124, 84);
+$muted: #444;
+
+// Translucents
+$primary-light-50: rgba(182, 248, 209, .5);
+
+// Background
+$background-light: rgb(255, 255, 255);
+$background-dark: rgb(17, 24, 39);
+
+$background-light-b: rgb(244, 244, 244);
+$background-dark-b: rgb(27, 35, 53);
+
+// Borders
+$border: #b4b4b4;
+
+// Style Blocks
+.transitioner-25 {
+    transition: all 0.25s linear;
+    -o-transition: all 0.25s linear;
+    -moz-transition: all 0.25s linear;
+    -webkit-transition: all 0.25s linear;
+}

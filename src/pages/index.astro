@@ -1,0 +1,41 @@
+---
+import Jumper from '../components/Jumper.vue'
+import Code from '../floaters/Code.astro'
+
+const title: string = "Exos Reader";
+---
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{title}</title>
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+        <link rel="stylesheet" href="/style/global.css">
+        <link rel="stylesheet" href="/style/home.css">
+    </head>
+    <body>
+        <header>
+            <Jumper />
+        </header>
+        <main>
+        </main>
+        <Code />
+    </body>
+</html>
+
+<style lang="scss">
+@import "../scss/variables";
+
+header {
+    background-color: white;
+    padding: 1rem;
+    border-radius: 0 0 20px 20px;
+    box-shadow: 0 1px 1px 0 $border;
+}
+
+@media (prefers-color-scheme: dark) {
+    header {
+        background: $background-dark;
+    }
+}
+</style>
