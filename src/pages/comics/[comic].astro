@@ -1,5 +1,7 @@
 ---
-import { mangas} from '../../../data.mjs';
+import Base from '../../layouts/Base.astro';
+import Backton from '../../fragments/Backton.astro';
+import { mangas, titles, chapters as cs, synopses, authors} from '../../../data.mjs';
 
 export async function getStaticPaths() {
     return mangas.map(manga => 
@@ -9,6 +11,85 @@ export async function getStaticPaths() {
     ); 
 }
 
-const title = "Astrocom - Panels";
 const { comic } = Astro.request.params;
+const title = titles[comic];
+const chapters = [...Array(cs[comic].length).keys()];
+const author = authors[comic];
+const synopsis = synopses[comic];
 ---
+<Base title={`Astrocom - ${comic}`}>
+    <main>
+        <section class="description">
+            <div>
+                <Backton color="#ffffff" href="/" />
+            </div>
+            <div>
+                <h1 class="title">{title}</h1>
+                <p>{synopsis}</p>
+                <span class="tag tag--accent-dark">{author}</span>
+            </div>
+        </section>
+        <section class="chapters">
+            {chapters.map(chapter => <button onclick={`location.href='/comics/${comic}-${chapter + 1}'`}>Chapter &nbsp; {chapter + 1}</button>)}
+        </section>
+    </main>
+</Base>
+
+<style lang="scss">
+@import '../../scss/variables';
+@import '../../scss/globals';
+
+main {
+    @extend .flex-centered;
+    flex-direction: row;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+
+    section {
+        height: 100%;
+        
+        &.description {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: start;
+            padding: 5rem 2rem;
+            flex: 1;
+            background: $accent-light;
+            color: $accent-dark;
+
+            div {
+                &:first-of-type {
+                    margin-bottom: 8vh;
+                }
+            }
+
+            h1, p {
+                margin-bottom: 2rem;
+            }
+            
+        }
+
+        &.chapters {
+            flex: 3;
+            display: grid;
+            gap: 10px;
+            grid-template-columns: repeat(8, 1fr);
+            padding: 5rem 2rem;
+            overflow-y: auto;
+
+            &::-webkit-scrollbar {
+                display: none;
+            }
+
+            button {
+                padding: 10px;
+                border-radius: 16px;
+                border: 0;
+                cursor: pointer;
+            }
+        }
+    }
+}
+</style>

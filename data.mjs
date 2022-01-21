@@ -14,8 +14,24 @@ const chapters = {
     omniscient: [13, 28, 37, 50, 5, 45, 41, 11, 7, 12, 9, 10, 8, 9, 32, 18, 25, 8, 22, 25, 73, 51, 39, 66, 55, 21, 33, 10, 10, 21, 25, 84, 32, 65, 42, 8, 73, 44, 43, 37, 46, 32, 102, 60, 26, 53, 18, 28, 54, 59, 54, 16, 61, 62, 15, 51, 26, 61, 55, 20, 113, 7, 9, 68, 8, 49, 71, 18, 6, 26, 59, 87, 83, 119, 159, 13, 121, 95, 83, 6, 7]
 };
 
+const synopses = {
+    solo: "10 years ago, after “the Gate” that connected the real world with the monster world opened, some of the ordinary, everyday people received the power to hunt monsters within the Gate. They are known as Hunters. However, not all Hunters are powerful.",
+    kimetsu: "Tanjiro is the oldest son in his family who has lost his father. One day, Tanjiro ventures off to another town to sell charcoal. Instead of going home, he ends up staying the night at someone else's house due to rumors of a demon nearby in the mountains. When he gets home the following day, a terrible tragedy awaits him.",
+    kaiju8: "Grotesque, Godzilla-like monsters called “kaijuu” have been appearing around Japan for many years. To combat these beasts, an elite military unit known as the Defense Corps risks their lives daily to protect civilians. Once a creature is killed, “sweepers”—working under the Professional Kaijuu Cleaner Corporation—are left to dispose of its remains.",
+    omniscient: "‘This is a development that I know of.’ The moment he thought that, the world had been destroyed, and a new universe had unfolded. The new life of an ordinary reader begins within the world of the novel, a novel that he alone had finished."
+};
+
+const authors = {
+    solo: "Sung-Lak Jang",
+    kimetsu: "Gotouge Koyoharu",
+    kaiju8: "Matsumoto Naoya",
+    omniscient: "Sing Shong"
+}
+
 export {
     mangas,
     titles,
-    chapters
+    chapters,
+    synopses,
+    authors
 };

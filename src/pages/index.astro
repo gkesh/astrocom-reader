@@ -1,42 +1,31 @@
 ---
+import Base from '../layouts/Base.astro';
 import Texicon from '../fragments/Texicon.astro';
 import { mangas, titles } from '../../data.mjs';
 import FaIcon from '../icons/FaIcon.vue';
 import { lens } from '../icons/faicons.json';
-
-const title = "Astrocom"
 ---
-<html lang="en" dark="true">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>{title}</title>
-        <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-        <link rel="stylesheet" href="/style/global.css">
-        <link rel="stylesheet" href="/style/home.css">
-    </head>
-    <body>
-        <main>
-            <section class="head">
-                <img src="/assets/reader.png" alt="Logo">
-            </section>
-            <section class="strip">
-                {mangas.map((manga) => (
-                    <Texicon title={titles[manga]} href={`/comics/${manga}-1`} />
-                ))}
-            </section>
-            <section class="search">
-                <input type="text" class="big" placeholder="Search">
-                <div>
-                    <FaIcon
-                        color="#111827"
-                        size="24 20"
-                        draw={lens} />
-                </div>
-            </section>
-        </main>
-    </body>
-</html>
+<Base title="Astrocom">
+    <main>
+        <section class="head">
+            <img src="/assets/reader.png" alt="Logo">
+        </section>
+        <section class="strip">
+            {mangas.map((manga) => (
+                <Texicon title={titles[manga]} href={`/comics/${manga}`} />
+            ))}
+        </section>
+        <section class="search">
+            <input type="text" class="big" placeholder="Search">
+            <div>
+                <FaIcon
+                    color="#111827"
+                    size="24 20"
+                    draw={lens} />
+            </div>
+        </section>
+    </main>
+</Base>
 
 <style lang="scss">
 @import "../scss/variables";
