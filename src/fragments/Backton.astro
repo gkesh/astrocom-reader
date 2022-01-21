@@ -1,0 +1,37 @@
+---
+import FaIcon from '../icons/FaIcon.vue';
+import { arrowLeft } from '../icons/faicons.json';
+
+const { href, color } = Astro.props;
+
+---
+<button onclick={`location.href='${href}'`} style={`color: ${color}`}>
+    <FaIcon
+        color={color}
+        size="20 20"
+        draw={arrowLeft} />
+    <span>Back</span>
+</button>
+
+<style lang="scss">
+@import '../scss/variables.scss';
+@import '../scss/globals.scss';
+
+button {
+    background: none;
+    border: none;
+    font-size: 1.2em;
+    font-weight: 900;
+    cursor: pointer;
+    margin: 0;
+    @extend .flex-centered;
+
+    span {
+        padding-left: 0.8rem;
+    }
+
+    &:focus, &:focus-within {
+        outline: none;
+    }
+}
+</style>
