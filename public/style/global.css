@@ -10,6 +10,7 @@
 
 :root {
   font-size: 1rem;
+  --font-color: #111827;
   --user-font-scale: 1rem - 16px;
   font-size: clamp(0.875rem, 0.4626rem + 1.0309vw + var(--user-font-scale), 1.125rem);
 }
@@ -18,7 +19,7 @@ body {
   width: 100%;
   min-height: 100vh;
   background: white;
-  color: #111827;
+  color: var(--font-color);
 }
 
 @media (prefers-color-scheme: dark) {

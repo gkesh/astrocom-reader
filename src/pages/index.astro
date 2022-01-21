@@ -1,10 +1,12 @@
 ---
-import Jumper from '../components/Jumper.vue'
-import Code from '../floaters/Code.astro'
+import Texicon from '../fragments/Texicon.astro';
+import { mangas, titles } from '../../data.mjs';
+import FaIcon from '../icons/FaIcon.vue';
+import { lens } from '../icons/faicons.json';
 
-const title: string = "Exos Reader";
+const title = "Astrocom"
 ---
-<html lang="en">
+<html lang="en" dark="true">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -14,28 +16,66 @@ const title: string = "Exos Reader";
         <link rel="stylesheet" href="/style/home.css">
     </head>
     <body>
-        <header>
-            <Jumper />
-        </header>
         <main>
+            <section class="head">
+                <img src="/assets/reader.png" alt="Logo">
+            </section>
+            <section class="strip">
+                {mangas.map((manga) => (
+                    <Texicon title={titles[manga]} href={`/comics/${manga}-1`} />
+                ))}
+            </section>
+            <section class="search">
+                <input type="text" class="big" placeholder="Search">
+                <div>
+                    <FaIcon
+                        color="#111827"
+                        size="24 20"
+                        draw={lens} />
+                </div>
+            </section>
         </main>
-        <Code />
     </body>
 </html>
 
 <style lang="scss">
 @import "../scss/variables";
+@import "../scss/globals";
 
-header {
-    background-color: white;
-    padding: 1rem;
-    border-radius: 0 0 20px 20px;
-    box-shadow: 0 1px 1px 0 $border;
+main {
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    @extend .flex-centered;
+    flex-direction: column;
+    gap: 5rem;
 }
+section {
+    &.head {
+        height: 10rem;
+        text-align: center;
 
-@media (prefers-color-scheme: dark) {
-    header {
-        background: $background-dark;
+        img {
+            height: 100%;
+        }
+    }
+    &.strip {
+        @extend .flex-centered;
+        gap: 2rem;
+    }
+    &.search {
+        display: flex;
+        flex-direction: row;
+        padding-left: 35px;
+
+        div {
+                @extend .flex-centered;
+                margin: 5px;
+                padding: 0 24px;
+                background: $background-light-b;
+                border-radius: 0 16px 16px 0;
+                transform: translateX(-35px);
+        }
     }
 }
 </style>

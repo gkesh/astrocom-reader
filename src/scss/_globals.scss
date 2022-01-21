@@ -1,0 +1,86 @@
+input[type="text"], button {
+    height: 50px;
+    margin: 5px;
+    border-radius: 16px;
+    font-size: 0.9em;
+    @extend .transitioner-25;
+}
+
+input[type="text"] {
+    width: 150px;
+    padding-left: 24px;
+    background: $background-light-b;
+    border: 1px solid transparent;
+
+    &.small {
+        width: 100px;
+    }
+
+    &.big {
+        font-size: 1.1em;
+        width: 350px;
+        height: 70px !important;
+
+        &::placeholder {
+            font-size: 1.1em;
+        }
+    }
+
+    &:hover, &:focus {
+        background: white;
+        border: 1px solid $border;
+        outline: none;
+
+        & + div {
+            border: 1px solid $border;
+            border-left: 0px !important;
+        }
+    }
+}
+
+.flex-centered {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@mixin styledButton($color, $text, $hover) {
+    background: $color;
+    border: 1px solid $color;
+    color: $text;
+
+    &:hover {
+        cursor: pointer;
+        box-shadow: 0 0 5px 5px $hover;
+    }
+
+    &:focus, &:focus-within {
+        outline: none;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        button {
+            background: $primary-dark;
+            border-color: $primary-dark;
+            color: $color;
+        }
+    }    
+}
+
+button.btn {
+    aspect-ratio: 1;
+
+    &--primary {
+        @include styledButton($primary-light, $primary-dark, $primary-light-50);
+    }
+
+    &--secondary {
+        @include styledButton($secondary-light, $secondary-dark, $secondary-light-50);
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    input[type="text"] {
+        background: $background-dark-b;
+    }
+}

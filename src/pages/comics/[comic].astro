@@ -1,0 +1,14 @@
+---
+import { mangas} from '../../../data.mjs';
+
+export async function getStaticPaths() {
+    return mangas.map(manga => 
+        new Object({
+            params: { comic: manga }
+        })
+    ); 
+}
+
+const title = "Astrocom - Panels";
+const { comic } = Astro.request.params;
+---

@@ -1,0 +1,51 @@
+---
+const { title, href } = Astro.props;
+const label = title.charAt(0);
+---
+<article onclick={`location.href='${href}'`}>
+    <h1>{label}</h1>
+    <small>{title}</small>
+</article>
+<style lang="scss">
+@import '../scss/variables';
+@import '../scss/globals';
+
+article {
+    @extend .flex-centered;
+    flex-direction: column;
+    padding: 20px;
+    height: 8rem;
+    width: 8rem;
+    border-radius: 2rem;
+    color: white;
+    background-color: $secondary-light;
+
+    &:hover {
+        cursor: pointer;
+        
+        h1 {
+            @extend .transitioner-25;
+            transform: translateY(-5px);
+        }
+
+        small {
+            @extend .transitioner-25;
+            display: block;
+            opacity: 1;
+        }
+    }
+
+    h1 {
+        font-size: 4em;
+        font-weight: 900;
+        text-align: center;
+        margin: 0;
+    }
+
+    small {
+        display: none;
+        opacity: 0;
+        text-align: center;
+    }
+}
+</style>

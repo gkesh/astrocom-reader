@@ -1,0 +1,75 @@
+---
+import Jumper from '../../components/Jumper.vue';
+import Skipper from '../../components/Skipper.vue';
+import Viewer from '../../components/Viewer.vue';
+import { chapters } from '../../../data.mjs';
+
+export async function getStaticPaths() {
+    return [].concat.apply([], [...Object.entries(chapters).map(([name, pages]) => 
+        [...Array(pages.length).keys()].map(i => 
+            new Object({params: {comic: name, chapter: `${i}`}})
+    ))]); 
+}
+
+const title = "Astrocom - Panels";
+const { comic, chapter } = Astro.request.params;
+
+const pages = [...Array(chapters[comic][parseInt(chapter) - 1] + 1).keys()].map(i => `/library/${comic}/chapter_${chapter}/chapter_${chapter}_${i}.jpg`);
+---
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{title}</title>
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+        <link rel="stylesheet" href="/style/global.css">
+        <link rel="stylesheet" href="/style/home.css">
+    </head>
+    <body>
+        <header id="naver">
+            <Skipper client:load />
+            <a href="/">
+                <img src="/assets/reader.png" alt="Logo">
+            </a>
+            <Jumper />
+        </header>
+        <main>
+            <Viewer dir={true} pages={pages} />
+        </main>
+    </body>
+</html>
+
+<style lang="scss">
+@import "../../scss/variables";
+
+header {
+    background-color: white;
+    padding: 1rem;
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.25);
+    display: flex;
+    justify-content: space-between;
+    z-index: 99;
+    position:fixed;
+    top:0;
+    left: 0;
+    right: 0;
+
+    img {
+        height: 50px;
+        width: auto;
+    }
+}
+
+main {
+    height: 100vh;
+    overflow: hidden;
+    z-index: 1;
+    padding-top: 96px;
+}
+
+@media (prefers-color-scheme: dark) {
+    header {
+        background: $background-dark;
+    }
+}
+</style>
