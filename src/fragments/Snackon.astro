@@ -1,0 +1,70 @@
+---
+const { title, message, type } = Astro.props;
+---
+<article class={type}>
+    <h4>{title}</h4>
+    <small>{message}</small>
+</article>
+
+<style lang="scss">
+@import '../scss/variables';
+
+article {
+    display: flex;
+    flex-direction: column;
+    box-shadow: var(--shadow);
+    border-radius: var(--border-radius);
+    width: 16rem;
+    gap: 10px;
+    padding: 1rem;
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    overflow: hidden;
+    border-top: 5px solid white;
+    background: $background-light;
+
+    &.hidden {
+        display: none;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        & {
+            background: $background-dark;
+        }
+    }
+
+    &.error {
+        border-top-color: $accent-light;
+
+        h4 {
+            color: $accent-dark;
+        }
+    }
+
+    &.success {
+        border-top-color: $primary-light;
+
+        h4 {
+            color: $primary-dark;
+        }
+    }
+
+    &.info {
+        border-top-color: $secondary-light;
+
+        h4 {
+            color: $secondary-dark;
+        }
+    }
+
+    h4, small {
+        margin: 0;
+    }
+
+    small {
+        font-weight: 500;
+    }
+    
+}
+</style>

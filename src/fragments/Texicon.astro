@@ -20,6 +20,10 @@ article {
     color: white;
     background-color: $secondary-light;
 
+    @media (prefers-color-scheme: dark) {
+        color: $secondary-dark;
+    }
+
     &:hover {
         cursor: pointer;
         

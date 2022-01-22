@@ -1,0 +1,35 @@
+---
+import FaIcon from '../icons/FaIcon.vue';
+import { location } from '../icons/faicons.json';
+
+const { comic, chapter } = Astro.props
+---
+<div onclick={`location.href='/comics/${comic}'`}>
+    <FaIcon
+        color="#ba494b"
+        size="20 20"
+        draw={location} />
+    <span>{chapter}</span>
+</div>
+
+<style lang="scss">
+@import '../scss/variables.scss';
+@import '../scss/globals.scss';
+
+div {
+    @extend .flex-centered;
+    background: $accent-light;
+    color: $accent-dark;
+    padding: 13px 20px;
+    margin: auto 0;
+    height: fit-content;
+    border-radius: var(--border-radius);
+    font-size: 1.1em;
+    font-weight: 800;
+    cursor: pointer;
+
+    span {
+        margin-left: 10px;
+    }
+}
+</style>

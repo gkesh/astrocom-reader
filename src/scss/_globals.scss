@@ -1,7 +1,7 @@
 input[type="text"], button {
     height: 50px;
     margin: 5px;
-    border-radius: 16px;
+    border-radius: var(--border-radius);
     font-size: 0.9em;
     @extend .transitioner-25;
 }
@@ -30,10 +30,37 @@ input[type="text"] {
         background: white;
         border: 1px solid $border;
         outline: none;
+        color: white;
 
         & + div {
             border: 1px solid $border;
             border-left: 0px !important;
+        }
+
+    }
+
+    @media (prefers-color-scheme: dark) {
+        &:hover, &:focus {
+            background: $background-dark;
+            border-color: $gray-100;
+
+
+            & + div {
+                border-color: $gray-100;
+            }
+        }
+    }
+
+    &.error {
+        background: $accent-light;
+        color: $accent-dark;
+
+        &:hover, &:focus {
+            border: 1px solid $accent-dark;
+        }
+
+        &::placeholder {
+            color: $accent-dark;
         }
     }
 }
@@ -51,7 +78,7 @@ input[type="text"] {
 
 .tag {
     padding: 8px 16px;
-    border-radius: 10px;
+    border-radius: var(--border-radius);
     font-weight: 700;
 
     &--primary {

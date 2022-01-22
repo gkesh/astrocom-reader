@@ -3,11 +3,13 @@
         <input 
             type="text" 
             id="ichapter" 
+            @keyup="validate('chapter', $event.target)"
             :placeholder="chapterPlaceholder" />
         <input 
             type="text"
             class="small"
             id="ipage" 
+            @keyup="validate('page', $event.target)"
             :placeholder="pagePlaceholder" />
         <button 
             type="button" 
@@ -21,24 +23,47 @@
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-    setup() {
-        const chapterPlaceholder = "Chapter"
-        const pagePlaceholder = "Page"
+    props: ["limits"],
+    setup(props) {
+        const valid = {
+            chapter: false,
+            page: false
+        };
+
+        const chapterPlaceholder = "Chapter";
+        const pagePlaceholder = "Page";
 
         const jump = () => {
-            const ichapter = Number(document.getElementById("ichapter").value) || -1
-            const ipage = Number(document.getElementById("ipage").value) || -1
+            if (!(valid.chapter && valid.page)) return;
 
-            if (ichapter === -1 || ipage === -1) return
+            const ichapter = Number(document.getElementById("ichapter").value) || -1;
+            const ipage = Number(document.getElementById("ipage").value) || -1;
 
-            // Execute jump procedure
-            alert(`Jumping to Chapter ${ichapter} Page ${ipage}`)
+            if (ichapter === -1 || ipage === -1) return;
+
+            const url = window.location.pathname.split("-")[0];
+            window.location.href = `${url}-${ichapter}#page-${ipage}`;
+        }
+
+        const validate = (input, target) => {
+            console.log(props.limits.length);
+            const limit = input === 'chapter' ? props.limits.length: props.limits[Number(document.getElementById("ichapter").value) - 1];
+
+            if (target.value > limit) {
+                target.classList.add("error");
+                valid[input] = false;
+                return;
+            }
+
+            target.classList.remove("error");
+            valid[input] = true;
         }
 
         return {
             chapterPlaceholder,
             pagePlaceholder,
-            jump
+            jump,
+            validate
         }
     }
 })

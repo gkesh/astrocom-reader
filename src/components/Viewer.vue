@@ -1,7 +1,7 @@
 <template>
     <div class="viewer">
         <div v-if="dir">
-            <img v-for="page in pages" :key="page" :src="page" alt="Page" />
+            <img v-for="(page, idx) in pages" :key="idx" :id="`page-${idx}`" :src="page" alt="Page" />
         </div>
         <div v-else>
             <img :src="pages" alt="Page">

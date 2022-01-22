@@ -3,26 +3,32 @@ import Base from '../../layouts/Base.astro';
 import Jumper from '../../components/Jumper.vue';
 import Skipper from '../../components/Skipper.vue';
 import Viewer from '../../components/Viewer.vue';
+import Chapton from '../../fragments/Chapton.astro';
 import { chapters } from '../../../data.mjs';
 
 export async function getStaticPaths() {
     return [].concat.apply([], [...Object.entries(chapters).map(([name, pages]) => 
         [...Array(pages.length).keys()].map(i => 
-            new Object({params: {comic: name, chapter: `${i}`}})
+            new Object({params: {comic: name, chapter: `${i + 1}`}})
     ))]); 
 }
 
 const { comic, chapter } = Astro.request.params;
 
 const pages = [...Array(chapters[comic][parseInt(chapter) - 1] + 1).keys()].map(i => `/library/${comic}/chapter_${chapter}/chapter_${chapter}_${i}.jpg`);
+const limit = chapters[comic].length;
+const pageLimits = chapters[comic];
 ---
 <Base title="Astrocom - Panels">
     <header>
-        <Skipper client:load />
+        <div class="start">
+            <Skipper limit={limit} client:load />
+            <Chapton comic={comic} chapter={chapter} />
+        </div>
         <a href="/">
             <img src="/assets/reader.png" alt="Logo">
         </a>
-        <Jumper />
+        <Jumper limits={pageLimits} client:load />
     </header>
     <main>
         <Viewer dir={true} pages={pages} />
@@ -47,6 +53,12 @@ header {
     img {
         height: 50px;
         width: auto;
+    }
+
+    div.start {
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
     }
 }
 

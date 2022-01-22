@@ -19,7 +19,7 @@ import { lens } from '../icons/faicons.json';
             <input type="text" class="big" placeholder="Search">
             <div>
                 <FaIcon
-                    color="#111827"
+                    color="#686868"
                     size="24 20"
                     draw={lens} />
             </div>
@@ -64,6 +64,10 @@ section {
                 background: $background-light-b;
                 border-radius: 0 16px 16px 0;
                 transform: translateX(-35px);
+
+                @media (prefers-color-scheme: dark) {
+                    background: $background-dark-b;
+                }
         }
     }
 }
