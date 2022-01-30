@@ -26,7 +26,7 @@ const authors = {
     kimetsu: "Gotouge Koyoharu",
     kaiju8: "Matsumoto Naoya",
     omniscient: "Sing Shong"
-}
+};
 
 export {
     mangas,

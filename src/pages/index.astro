@@ -4,6 +4,12 @@ import Texicon from '../fragments/Texicon.astro';
 import { mangas, titles } from '../../data.mjs';
 import FaIcon from '../icons/FaIcon.vue';
 import { lens } from '../icons/faicons.json';
+
+import { gqlFetch } from '../graphql/client.js';
+import { getAllComics } from '../graphql/queries.js';
+
+
+gqlFetch(getAllComics).then(data => console.log(JSON.stringify(data)));
 ---
 <Base title="Astrocom">
     <main>
