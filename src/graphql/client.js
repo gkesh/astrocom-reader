@@ -30,6 +30,4 @@ export const gql = (type, content, variables) => {
     };
 };
 
-export const gqlFetch = async (gql) => {
-    return await fetch(ENDPOINT, gql).then(result => result.json());
-};
+export const gqlFetch = async (gql) => await fetch(ENDPOINT, gql).then(result => result.json());
