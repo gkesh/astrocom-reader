@@ -5,21 +5,43 @@ import Skipper from '../../components/Skipper.vue';
 import Viewer from '../../components/Viewer.vue';
 import Chapton from '../../fragments/Chapton.astro';
 import { chapters } from '../../../data.mjs';
+import { gqlFetch } from '../../graphql/client.js';
+import { getComicChapters, getChapter } from '../../graphql/queries.js';
 
 export async function getStaticPaths() {
-    return [].concat.apply([], [...Object.entries(chapters).map(([name, pages]) => 
-        [...Array(pages.length).keys()].map(i => 
-            new Object({params: {comic: name, chapter: `${i + 1}`}})
+    const {
+        data: {
+            chapters: {
+                data: comics
+            }
+        }
+    } = await gqlFetch(getComicChapters());
+
+    return [].concat.apply([], [comics.map(({code, count}) => 
+        [...Array(count).keys()].map(i => 
+            new Object({params: {comic: code, chapter: `${i + 1}`}})
     ))]); 
 }
 
 const { comic, chapter } = Astro.request.params;
 
-const pages = [...Array(chapters[comic][parseInt(chapter) - 1] + 1).keys()].map(i => `/library/${comic}/chapter_${chapter}/chapter_${chapter}_${i}.jpg`);
-const limit = chapters[comic].length;
-const pageLimits = chapters[comic];
+let {
+    data: {
+        chapter: {
+            data: {
+                pages: count,
+                max: limit
+            }
+        }
+    }
+} = await gqlFetch(getChapter(comic, parseInt(chapter)));
+
+count = parseInt(count);
+limit = parseInt(limit);
+
+const pages = [...Array(count + 1).keys()].map(i => `/library/${comic}/chapter_${chapter}/chapter_${chapter}_${i}.jpg`);
 ---
-<Base title="Astrocom - Panels">
+<Base title="Panels">
     <header>
         <div class="start">
             <Skipper limit={limit} client:load />
@@ -28,7 +50,7 @@ const pageLimits = chapters[comic];
         <a href="/">
             <img src="/assets/reader.png" alt="Logo">
         </a>
-        <Jumper limits={pageLimits} client:load />
+        <Jumper comic={comic} limit={limit} client:load />
     </header>
     <main>
         <Viewer dir={true} pages={pages} />

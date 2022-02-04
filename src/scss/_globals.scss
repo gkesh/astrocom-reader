@@ -30,7 +30,7 @@ input[type="text"] {
         background: white;
         border: 1px solid $border;
         outline: none;
-        color: white;
+        color: $muted;
 
         & + div {
             border: 1px solid $border;
@@ -43,7 +43,7 @@ input[type="text"] {
         &:hover, &:focus {
             background: $background-dark;
             border-color: $gray-100;
-
+            color: white;
 
             & + div {
                 border-color: $gray-100;

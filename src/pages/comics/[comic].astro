@@ -1,23 +1,42 @@
 ---
 import Base from '../../layouts/Base.astro';
 import Backton from '../../fragments/Backton.astro';
-import { mangas, titles, chapters as cs, synopses, authors} from '../../../data.mjs';
+import { gqlFetch } from '../../graphql/client.js';
+import { getComic, getComicTitles } from '../../graphql/queries.js';
 
 export async function getStaticPaths() {
-    return mangas.map(manga => 
+    const {
+        data: {
+            titles: {
+                data: comics
+            }
+        }
+    } = await gqlFetch(getComicTitles());
+
+    if (!comics) window.location.href = "/";
+
+    return comics.map(({code}) => 
         new Object({
-            params: { comic: manga }
+            params: { comic: code }
         })
     ); 
 }
 
 const { comic } = Astro.request.params;
-const title = titles[comic];
-const chapters = [...Array(cs[comic].length).keys()];
-const author = authors[comic];
-const synopsis = synopses[comic];
+const {
+    data: {
+        comic: {
+            data
+        }
+    }
+} = await gqlFetch(getComic(comic));
+
+const title = data.title;
+const chapters = data.chapters.map(({number}) => number);
+const author = `${data.author.first_name} ${data.author.last_name}`;
+const synopsis = data.synopsis;
 ---
-<Base title={`Astrocom - ${title}`}>
+<Base title={title}>
     <main>
         <section class="description">
             <div>
@@ -30,7 +49,7 @@ const synopsis = synopses[comic];
             </div>
         </section>
         <section class="chapters">
-            {chapters.map(chapter => <button onclick={`location.href='/comics/${comic}-${chapter + 1}'`}>Chapter &nbsp; {chapter + 1}</button>)}
+            {chapters.map(chapter => <button onclick={`location.href='/comics/${comic}-${chapter}'`}>Chapter &nbsp; {chapter}</button>)}
         </section>
     </main>
 </Base>

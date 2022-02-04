@@ -1,39 +1,87 @@
 import { GQLType, gql } from "./client";
 
-export const getAllComics = gql(
-    GQLType.QUERY, 
+
+export const getComicTitles = () => gql(
+    GQLType.QUERY,
     `
-    query getAllComics {
-        comics {
+    query getComicTitles {
+        titles {
             status
             data {
-                id
+                title
+                code
+            }
+            error
+        }
+    }
+    `
+);
+
+export const getComic = (comic) => gql(
+    GQLType.QUERY,
+    `
+    query getComic($comic: String!) {
+        comic(comic: $comic) {
+            status
+            data {
                 title
                 type
                 genres {
-                    id
                     name
                     description
                 }
                 author {
-                    id
                     first_name
                     last_name
                 }
                 publisher {
-                    id
                     name
                     country
                 }
                 chapters {
                     number
-                    pages
                 }
                 synopsis
+                code
                 date_published
                 date_updated
             }
+            error
+        }
+    }
+    `,
+    {comic}
+);
+
+export const getComicChapters = () => gql(
+    GQLType.QUERY, 
+    `
+    query getAllComicChapters {
+        chapters {
+            status
+            data {
+                code
+                count
+            }
+            error
         }
     }
     `
+);
+
+export const getChapter = (comic, number) => gql(
+    GQLType.QUERY,
+    `
+    query getChapters($comic: String!, $number: Int!) {
+        chapter (comic: $comic, number: $number) {
+            status
+            data {
+                pages
+                max
+            }
+            error
+        }
+    }
+    `,
+    {comic, number}
 );

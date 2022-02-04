@@ -34,22 +34,22 @@ export default defineComponent({
     },
     props: ["limit"],
     setup(props) {
-        const buttonColor = "#2c7c54";
-        const buttonSize = "20 20";
+        const buttonColor = "#2c7c54"
+        const buttonSize = "20 20"
 
         const getCurrentChapter = () => {
-            const path = window.location.pathname;
-            return [path.split("-")[0], parseInt(path.split("-")[1])];
+            const path = window.location.pathname
+            return [path.split("-")[0], parseInt(path.split("-")[1])]
         }
 
         const next = () => {
-            let [url, currentChapter] = getCurrentChapter();
-            if (currentChapter < props.limit) location.href = `${url}-${currentChapter + 1}`;
+            let [url, currentChapter] = getCurrentChapter()
+            if (currentChapter < props.limit) location.href = `${url}-${currentChapter + 1}`
         }
 
         const prev = () => {
-            let [url, currentChapter] = getCurrentChapter();
-            if (currentChapter > 1) location.href = `${url}-${currentChapter - 1}`;
+            let [url, currentChapter] = getCurrentChapter()
+            if (currentChapter > 1) location.href = `${url}-${currentChapter - 1}`
         }
 
         return {
