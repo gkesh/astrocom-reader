@@ -1,0 +1,34 @@
+---
+import FaIcon from '../icons/FaIcon.vue';
+import { arrowUp } from '../icons/faicons.json';
+---
+<div>
+    <FaIcon
+        color="#ba494b"
+        size="24 24"
+        draw={arrowUp} />
+</div>
+
+<style lang="scss">
+@import '../scss/variables.scss';
+@import '../scss/globals.scss';
+
+div {
+    @extend .flex-centered;
+    background-color: $accent-light;
+    width: 60px;
+    height: 60px;
+    border-radius: 20px;
+    position: absolute;
+    right: 1.5rem;
+    bottom: 1.5rem;
+
+    &:hover {
+        cursor: pointer;
+        svg {
+            @extend .transitioner-25;
+            @include platformize(transform, translateY(-2px));
+        }
+    }
+}
+</style>

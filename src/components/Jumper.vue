@@ -16,19 +16,37 @@
         <button 
             type="button" 
             class="btn btn--primary"
-            @click="jump">Go
+            @click="jump">
+            <FaIcon
+                :color="buttonColor"
+                :size="buttonSize"
+                :draw="run" />
         </button>
     </div>
 </template>
 
 <script>
 import { defineComponent } from 'vue'
+
+// API Calls
 import { gqlFetch } from '../graphql/client'
 import { getChapter } from '../graphql/queries'
 
+// Components
+import FaIcon from '../icons/FaIcon.vue'
+
+// Icons
+import { run } from '../icons/faicons.json'
+
 export default defineComponent({
+    components: {
+        FaIcon
+    },
     props: ["limit", "comic"],
     setup(props) {
+        const buttonColor = "#2c7c54"
+        const buttonSize = "20 20"
+
         const valid = {
             chapter: false,
             page: false
@@ -91,6 +109,9 @@ export default defineComponent({
         }
 
         return {
+            run,
+            buttonColor,
+            buttonSize,
             chapterPlaceholder,
             pagePlaceholder,
             jump,
@@ -103,4 +124,8 @@ export default defineComponent({
 <style lang="scss" scoped>
 @import "../scss/variables";
 @import "../scss/globals";
+
+div.jumper {
+    @extend .flex-centered;
+}
 </style>

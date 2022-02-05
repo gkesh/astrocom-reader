@@ -1,3 +1,33 @@
+@mixin styledButton($color, $text, $hover) {
+    background: $color;
+    border: 1px solid $color;
+    color: $text;
+
+    &:hover {
+        cursor: pointer;
+        box-shadow: 0 0 5px 5px $hover;
+    }
+
+    &:focus, &:focus-within {
+        outline: none;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        button {
+            background: $primary-dark;
+            border-color: $primary-dark;
+            color: $color;
+        }
+    }    
+}
+
+@mixin platformize($property, $value) {
+    #{$property}: #{$value};
+    -o-#{$property}: #{$value};
+    -moz-#{$property}: #{$value};
+    -webkit-#{$property}: #{$value};
+}
+
 input[type="text"], button {
     height: 50px;
     margin: 5px;
@@ -113,37 +143,12 @@ input[type="text"] {
 }
 
 .transitioner-25 {
-    transition: all 0.25s linear;
-    -o-transition: all 0.25s linear;
-    -moz-transition: all 0.25s linear;
-    -webkit-transition: all 0.25s linear;
-}
-
-@mixin styledButton($color, $text, $hover) {
-    background: $color;
-    border: 1px solid $color;
-    color: $text;
-
-    &:hover {
-        cursor: pointer;
-        box-shadow: 0 0 5px 5px $hover;
-    }
-
-    &:focus, &:focus-within {
-        outline: none;
-    }
-
-    @media (prefers-color-scheme: dark) {
-        button {
-            background: $primary-dark;
-            border-color: $primary-dark;
-            color: $color;
-        }
-    }    
+    @include platformize(transition, all 0.25s linear);
 }
 
 button.btn {
     aspect-ratio: 1;
+    @extend .flex-centered;
 
     &--primary {
         @include styledButton($primary-light, $primary-dark, $primary-light-50);

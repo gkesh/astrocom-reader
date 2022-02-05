@@ -4,7 +4,7 @@ import Jumper from '../../components/Jumper.vue';
 import Skipper from '../../components/Skipper.vue';
 import Viewer from '../../components/Viewer.vue';
 import Chapton from '../../fragments/Chapton.astro';
-import { chapters } from '../../../data.mjs';
+import Upton from '../../fragments/Upton.astro';
 import { gqlFetch } from '../../graphql/client.js';
 import { getComicChapters, getChapter } from '../../graphql/queries.js';
 
@@ -54,6 +54,7 @@ const pages = [...Array(count + 1).keys()].map(i => `/library/${comic}/chapter_$
     </header>
     <main>
         <Viewer dir={true} pages={pages} />
+        <Upton />
     </main>
 </Base>
 
@@ -63,9 +64,10 @@ const pages = [...Array(count + 1).keys()].map(i => `/library/${comic}/chapter_$
 header {
     background-color: white;
     padding: 1rem;
-    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.25);
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .1);
     display: flex;
     justify-content: space-between;
+    align-items: center;
     z-index: 99;
     position:fixed;
     top:0;
@@ -87,6 +89,7 @@ header {
 main {
     height: 100vh;
     overflow: hidden;
+    position: relative;
     z-index: 1;
     padding-top: 96px;
 }
