@@ -1,0 +1,72 @@
+---
+import Base from '../layouts/Base.astro';
+import Backton from '../fragments/Backton.astro';
+---
+<Base title="404">
+    <header>
+        <Backton color="#fcb9b2" href="/" />
+    </header>
+    <main>
+        <h1>404</h1>
+        <p>
+            Oops! Something has gone terribly wrong.<br /><br />
+            ( i _ i )
+        </p>
+    </main>
+    <footer>
+        <img src="/assets/astrocom.png" alt="Logo">
+    </footer>
+</Base>
+
+<style lang="scss" scoped>
+@import "../scss/variables";
+@import "../scss/globals";
+
+header {
+    position: fixed;
+    top: 0;
+    margin: 2rem 0 0 2rem;
+}
+
+main {
+    height: 100vh;
+    @extend .flex-centered;
+    flex-direction: column;
+
+    h1 {
+        font-size: 150px;
+        font-weight: 900;
+        margin-bottom: 2rem;
+        color: $accent-light;
+    }
+
+    p {
+        font-size: 1.2rem;
+        font-weight: 600;
+        text-align: center;
+        color: $muted;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        h1 {
+            color: $accent-dark;
+        }
+
+        p {
+            color: #ffffff;
+        }
+    }
+}
+
+footer {
+    position: fixed;
+    bottom: 4rem;
+    width: 100vw;
+    text-align: center;
+
+    img {
+        height: 5rem;
+        width: auto;
+    }
+}
+</style>
