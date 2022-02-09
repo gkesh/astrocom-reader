@@ -32,7 +32,6 @@ const {
 } = await gqlFetch(getComic(comic));
 
 const title = data.title;
-const chapters = data.chapters.map(({number}) => number);
 const author = `${data.author.first_name} ${data.author.last_name}`;
 const synopsis = data.synopsis;
 ---
@@ -49,7 +48,15 @@ const synopsis = data.synopsis;
             </div>
         </section>
         <section class="chapters">
-            {chapters.map(chapter => <button onclick={`location.href='/comics/${comic}-${chapter}'`}>Chapter &nbsp; {chapter}</button>)}
+            {
+                data.chapters.map(({visited, checkpoint, number: chapter}) => 
+                    <button
+                        onclick={`location.href='/comics/${comic}-${chapter}'`}
+                        class={(checkpoint? "checkpoint" : (visited? "visited": ""))}>
+                        Chapter &nbsp; {chapter}
+                    </button>
+                )
+            }
         </section>
     </main>
 </Base>
@@ -141,9 +148,24 @@ main {
                 border: 0;
                 cursor: pointer;
 
+                &.checkpoint {
+                    background-color: $primary-light;
+                    color: $primary-dark;
+                }
+
+                &.visited {
+                    background: rgba(0, 0, 0, .05);
+                    color: $gray-300;
+                }
+
                 @media (prefers-color-scheme: dark) {
                     background: $background-dark-b;
                     color: white;
+
+                    &.visited {
+                        background: rgba(255, 255, 255, .1);
+                        color: $gray-1000;
+                    }
                 }
             }
         }

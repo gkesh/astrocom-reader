@@ -1,8 +1,6 @@
-import { GQLType, gql } from "./client";
-
+import { gql } from "./client";
 
 export const getComicTitles = () => gql(
-    GQLType.QUERY,
     `
     query getComicTitles {
         titles {
@@ -18,9 +16,8 @@ export const getComicTitles = () => gql(
 );
 
 export const getComic = (comic) => gql(
-    GQLType.QUERY,
     `
-    query getComic($comic: String!) {
+    query getComic ($comic: String!) {
         comic(comic: $comic) {
             status
             data {
@@ -40,6 +37,8 @@ export const getComic = (comic) => gql(
                 }
                 chapters {
                     number
+                    visited
+                    checkpoint
                 }
                 synopsis
                 code
@@ -54,7 +53,6 @@ export const getComic = (comic) => gql(
 );
 
 export const getComicChapters = () => gql(
-    GQLType.QUERY, 
     `
     query getAllComicChapters {
         chapters {
@@ -70,14 +68,15 @@ export const getComicChapters = () => gql(
 );
 
 export const getChapter = (comic, number) => gql(
-    GQLType.QUERY,
     `
-    query getChapters($comic: String!, $number: Int!) {
+    query getChapters ($comic: String!, $number: Int!) {
         chapter (comic: $comic, number: $number) {
             status
             data {
                 pages
                 max
+                visited
+                checkpoint
             }
             error
         }

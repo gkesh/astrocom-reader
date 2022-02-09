@@ -7,15 +7,8 @@ export class GQLError extends Error {
     }
 }
 
-export const GQLType = {
-    QUERY: 'query',
-    MUTATION: 'mutation'
-};
-
-export const gql = (type, content, variables) => {
-    if (!type  || !content) throw new GQLError("Missing type or content on gql call.");
-
-    if (!Object.values(GQLType).includes(type)) throw new GQLType("Invalid type passed to gql call.");
+export const gql = (content, variables) => {
+    if (!content) throw new GQLError("Missing content on gql query call.");
 
     return {
         method: 'POST',
@@ -24,7 +17,7 @@ export const gql = (type, content, variables) => {
             'Access-Control-Allow-Origin': '*'
         },
         body: JSON.stringify({
-            [type]: content,
+            query: content,
             variables: variables ?? {}
         })
     };
