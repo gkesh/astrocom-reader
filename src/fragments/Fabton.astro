@@ -1,12 +1,13 @@
 ---
 import FaIcon from '../icons/FaIcon.vue';
-import { arrowUp } from '../icons/faicons.json';
+
+const { icon } = Astro.props;
 ---
 <div>
     <FaIcon
         color="#ba494b"
         size="24 24"
-        draw={arrowUp} />
+        draw={icon} />
 </div>
 
 <style lang="scss">
