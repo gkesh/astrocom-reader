@@ -69,7 +69,7 @@ export const getComicChapters = () => gql(
 
 export const getChapter = (comic, number) => gql(
     `
-    query getChapters ($comic: String!, $number: Int!) {
+    query getChapters ($comic: String!, $number: Float!) {
         chapter (comic: $comic, number: $number) {
             status
             data {
