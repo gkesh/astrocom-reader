@@ -1,9 +1,20 @@
 ---
 import Base from '../layouts/Base.astro';
+import Backton from '../fragments/Backton.astro';
 ---
 <Base title="New Comic">
-    <main>
+    <main class="columned">
+        <section class="tabs sidebar">
+            <div>
+                <Backton color="#ffffff" href="/" />
+            </div>
+            <div>
+                <h1>Add Comic</h1>
+            </div>
+        </section>
+        <section class="forms">
 
+        </section>
     </main>
 </Base>
 
@@ -11,5 +22,7 @@ import Base from '../layouts/Base.astro';
 @import "../scss/variables";
 @import "../scss/globals";
 
-
+section.forms {
+    flex: 3;
+}
 </style>

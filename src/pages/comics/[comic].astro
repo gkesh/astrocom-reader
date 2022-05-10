@@ -39,8 +39,8 @@ const author = `${data.author.first_name} ${data.author.last_name}`;
 const synopsis = data.synopsis;
 ---
 <Base title={title}>
-    <main>
-        <section class="description">
+    <main class="columned">
+        <section class="sidebar">
             <div>
                 <Backton color="#ffffff" href="/" />
             </div>
@@ -68,108 +68,65 @@ const synopsis = data.synopsis;
 @import '../../scss/variables';
 @import '../../scss/globals';
 
-main {
-    @extend .flex-centered;
-    flex-direction: row;
-    height: 100vh;
-    width: 100vw;
-    overflow: hidden;
+section.chapters {
+    flex: 3;
+    display: grid;
+    gap: 10px;
+    grid-template-columns: repeat(8, 1fr);
+    padding: 5rem 2rem;
+    overflow-y: auto;
 
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 1600px) {
         & {
-            flex-direction: column;
+            grid-template-columns: repeat(6, 1fr);
         }
     }
 
-    section {
-        height: 100%;
-        
-        &.description {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            justify-content: start;
-            padding: 5rem 2rem;
-            flex: 1;
-            background: $accent-light;
-            color: $accent-dark;
+    @media screen and (max-width: 1300px) {
+        & {
+            grid-template-columns: repeat(5, 1fr);
+        }
+    }
 
-            div:first-of-type {
-                margin-bottom: 8vh;
-            }
+    @media screen and (max-width: 1100px) {
+        & {
+            grid-template-columns: repeat(4, 1fr);
+        }
+    }
 
-            h1, p {
-                margin-bottom: 3rem;
-            }
+    @media screen and (max-width: 960px) {
+        & {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
 
-            @media (prefers-color-scheme: dark) {
-                background-color: $background-dark-b;
-                color: $accent-light;
-            }
-            
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+    button {
+        padding: 10px;
+        border-radius: var(--border-radius);
+        border: 0;
+        cursor: pointer;
+
+        &.checkpoint {
+            background-color: $primary-light;
+            color: $primary-dark;
         }
 
-        &.chapters {
-            flex: 3;
-            display: grid;
-            gap: 10px;
-            grid-template-columns: repeat(8, 1fr);
-            padding: 5rem 2rem;
-            overflow-y: auto;
+        &.visited {
+            background: rgba(0, 0, 0, .05);
+            color: $gray-300;
+        }
 
-            @media screen and (max-width: 1600px) {
-                & {
-                    grid-template-columns: repeat(6, 1fr);
-                }
-            }
+        @media (prefers-color-scheme: dark) {
+            background: $background-dark-b;
+            color: white;
 
-            @media screen and (max-width: 1300px) {
-                & {
-                    grid-template-columns: repeat(5, 1fr);
-                }
-            }
-
-            @media screen and (max-width: 1100px) {
-                & {
-                    grid-template-columns: repeat(4, 1fr);
-                }
-            }
-
-            @media screen and (max-width: 960px) {
-                & {
-                    grid-template-columns: repeat(3, 1fr);
-                }
-            }
-
-            &::-webkit-scrollbar {
-                display: none;
-            }
-
-            button {
-                padding: 10px;
-                border-radius: var(--border-radius);
-                border: 0;
-                cursor: pointer;
-
-                &.checkpoint {
-                    background-color: $primary-light;
-                    color: $primary-dark;
-                }
-
-                &.visited {
-                    background: rgba(0, 0, 0, .05);
-                    color: $gray-300;
-                }
-
-                @media (prefers-color-scheme: dark) {
-                    background: $background-dark-b;
-                    color: white;
-
-                    &.visited {
-                        background: rgba(255, 255, 255, .1);
-                        color: $gray-1000;
-                    }
-                }
+            &.visited {
+                background: rgba(255, 255, 255, .1);
+                color: $gray-1000;
             }
         }
     }

@@ -72,16 +72,20 @@ section {
         padding-left: 35px;
 
         div {
-                @extend .flex-centered;
-                margin: 5px;
-                padding: 0 24px;
-                background: $background-light-b;
-                border-radius: 0 16px 16px 0;
-                transform: translateX(-35px);
+            @extend .flex-centered;
+            margin: 5px;
+            padding: 0 24px;
+            background: $background-light-b;
+            border-radius: 0 16px 16px 0;
+            transform: translateX(-35px);
 
-                @media (prefers-color-scheme: dark) {
-                    background: $background-dark-b;
+            @media (prefers-color-scheme: dark) {
+                background: $background-dark-b;
+
+                & * {
+                    
                 }
+            }
         }
     }
 }
