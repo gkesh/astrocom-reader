@@ -151,7 +151,6 @@ input[type="text"] {
 }
 
 button.btn {
-    aspect-ratio: 1;
     @extend .flex-centered;
 
     &--primary {
