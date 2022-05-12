@@ -1,7 +1,6 @@
 import { gql } from "./client";
 
-export const getComicTitles = () => gql(
-    `
+export const getComicTitles = () => gql(`
     query getComicTitles {
         titles {
             status
@@ -12,11 +11,19 @@ export const getComicTitles = () => gql(
             error
         }
     }
-    `
-);
+`);
 
-export const getComic = (comic) => gql(
-    `
+export const getComicTypes = () => gql(`
+    query getComicTypes {
+        types {
+            status
+            data
+            error
+        }
+    }
+`)
+
+export const getComic = (comic) => gql(`
     query getComic ($comic: String!) {
         comic(comic: $comic) {
             status
@@ -48,12 +55,9 @@ export const getComic = (comic) => gql(
             error
         }
     }
-    `,
-    {comic}
-);
+`, {comic});
 
-export const getComicChapters = () => gql(
-    `
+export const getComicChapters = () => gql(`
     query getAllComicChapters {
         chapters {
             status
@@ -64,11 +68,9 @@ export const getComicChapters = () => gql(
             error
         }
     }
-    `
-);
+`);
 
-export const getChapter = (comic, number) => gql(
-    `
+export const getChapter = (comic, number) => gql(`
     query getChapters ($comic: String!, $number: Float!) {
         chapter (comic: $comic, number: $number) {
             status
@@ -81,6 +83,4 @@ export const getChapter = (comic, number) => gql(
             error
         }
     }
-    `,
-    {comic, number}
-);
+`, {comic, number});

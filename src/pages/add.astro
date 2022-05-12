@@ -1,6 +1,19 @@
 ---
 import Base from '../layouts/Base.astro';
 import Backton from '../fragments/Backton.astro';
+import Toggler from '../components/Toggler.vue';
+
+// Queries
+import { gqlFetch } from '../graphql/client.js';
+import { getComicTypes } from '../graphql/queries.js';
+
+const {
+    data: {
+        types: {
+            data: types
+        }
+    }
+} = await gqlFetch(getComicTypes());
 ---
 <Base title="New Comic">
     <main class="columned">
@@ -13,8 +26,27 @@ import Backton from '../fragments/Backton.astro';
                 <p>Please fill the required details and ensure you have enetered the correct source for the comic, preferably kissmanga links. <br /><br /> More scrappers will be supported in the future so please be on the lookout for newer releases in the GitHub page.</p>
             </div>
         </section>
-        <section class="forms">
-
+        <section class="forms flex-centered">
+            <form name="add">
+                <fieldset>
+                    <div class="field-row">
+                        <input type="text" class="big" name="title" placeholder="Comic Name" />
+                        <input type="text" class="big" name="author" placeholder="Author Name" />
+                        <input type="text" class="big" name="publisher" placeholder="Publisher Name" />
+                    </div>
+                    <div class="field-row">
+                        <textarea class="big" name="synopsis" placeholder="Enter Synopsis Here"></textarea>
+                    </div>
+                    <div class="field-row">
+                        <input type="date" class="big" name="published">
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <div class="field-row">
+                        <Toggler client:load right="Completed" left="Ongoing" />
+                    </div>
+                </fieldset>
+            </form>
         </section>
     </main>
 </Base>
