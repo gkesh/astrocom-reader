@@ -2,16 +2,27 @@
 // Components
 import Base from '../layouts/Base.astro';
 import Backton from '../fragments/Backton.astro';
+
+export async function getStaticPaths() {
+    const codes = ["404", "500", "503", "505"];
+
+    return codes.map((code) =>
+        new Object({
+            params: {error: code}
+        })
+    );
+}
+
+const { error } = Astro.request.params;
 ---
-<Base title="404">
+<Base title={error}>
     <header>
         <Backton color="#fcb9b2" href="/" />
     </header>
     <main>
-        <h1>404</h1>
+        <h1>{error}</h1>
         <p>
-            Oops! Something has gone terribly wrong.<br /><br />
-            ( i _ i )
+            Oops! Something has gone terribly wrong
         </p>
     </main>
     <footer>

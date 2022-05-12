@@ -186,10 +186,14 @@ main.columned {
             padding: 5rem 2rem;
             flex: 1;
             background: $accent-light;
-            color: $accent-dark;
+            color: $muted;
 
             div:first-of-type {
                 margin-bottom: 8vh;
+            }
+
+            h1 {
+                color: $accent-dark;
             }
 
             h1, p {
@@ -198,7 +202,7 @@ main.columned {
 
             @media (prefers-color-scheme: dark) {
                 background-color: $background-dark-b;
-                color: $accent-light;
+                color: white;
             }
             
         }
