@@ -1,4 +1,5 @@
 ---
+// Components
 import Base from '../layouts/Base.astro';
 import Backton from '../fragments/Backton.astro';
 import Toggler from '../components/Toggler.vue';
@@ -7,13 +8,20 @@ import Toggler from '../components/Toggler.vue';
 import { gqlFetch } from '../graphql/client.js';
 import { getComicTypes } from '../graphql/queries.js';
 
+// Query call
 const {
     data: {
         types: {
-            data: types
+            data: options
         }
     }
 } = await gqlFetch(getComicTypes());
+
+// Event Handlers
+const testSource = (target: HTMLInputElement) => {
+    const link = target.value;
+    console.log(link);
+}
 ---
 <Base title="New Comic">
     <main class="columned">
@@ -35,15 +43,22 @@ const {
                         <input type="text" class="big" name="publisher" placeholder="Publisher Name" />
                     </div>
                     <div class="field-row">
-                        <textarea class="big" name="synopsis" placeholder="Enter Synopsis Here"></textarea>
+                        <textarea name="synopsis" placeholder="Enter Synopsis Here"></textarea>
                     </div>
                     <div class="field-row">
                         <input type="date" class="big" name="published">
+                        <select name="type" class="big">
+                            <option>Select a type</option>
+                            {Array.from(options).map((option) =>
+                                <option>{option}</option>
+                            )}
+                        </select>
                     </div>
                 </fieldset>
                 <fieldset>
                     <div class="field-row">
                         <Toggler client:load right="Completed" left="Ongoing" />
+                        <input type="text" class="big" name="source" placeholder="Source Link" onblur="testSource(this)" />
                     </div>
                 </fieldset>
             </form>
@@ -57,5 +72,12 @@ const {
 
 section.forms {
     flex: 3;
+
+    textarea {
+        resize: none;
+        padding: 24px;
+        height: 120px;
+        font-size: 1.1em;
+    }
 }
 </style>

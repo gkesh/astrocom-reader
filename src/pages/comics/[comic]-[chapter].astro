@@ -30,7 +30,7 @@ export async function getStaticPaths() {
     ))]); 
 }
 
-const { comic, chapter } = Astro.request.params;
+const { comic, chapter } = Astro.params;
 
 let {
     data: {
@@ -63,6 +63,7 @@ let {
     }
 } = await gqlFetch(setCheckpoint(comic, parseInt(chapter)));
 
+// TODO: Implement Snackon
 if (!checkpoint) console.log("Failed to set checkpoint");
 
 const pages = [...Array(count + 1).keys()].map(i => `/library/${comic}/chapter_${chapter}/chapter_${chapter}_${i}.jpg`);

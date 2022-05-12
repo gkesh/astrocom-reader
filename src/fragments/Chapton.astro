@@ -2,7 +2,12 @@
 import FaIcon from '../icons/FaIcon.vue';
 import { location } from '../icons/faicons.json';
 
-const { comic, chapter } = Astro.props
+interface Props  {
+    comic: string
+    chapter: string
+}
+
+const { comic, chapter } = Astro.props as Props;
 ---
 <div onclick={`location.href='/comics/${comic}'`}>
     <FaIcon

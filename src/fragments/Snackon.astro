@@ -1,5 +1,11 @@
 ---
-const { title, message, type } = Astro.props;
+interface Props {
+    title: string
+    message: string
+    type: 'success' | 'info' | 'error'
+}
+
+const { title, message, type } = Astro.props as Props;
 ---
 <article class={type}>
     <h4>{title}</h4>

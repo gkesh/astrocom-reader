@@ -13,7 +13,7 @@ export async function getStaticPaths() {
     );
 }
 
-const { error } = Astro.request.params;
+const { error } = Astro.params;
 ---
 <Base title={error}>
     <header>

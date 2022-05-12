@@ -1,5 +1,11 @@
 ---
-const { text, href, img } = Astro.props;
+interface Props {
+    text: string
+    href: string
+    img: string
+}
+
+const { text, href, img } = Astro.props as Props;
 ---
 <article onclick={`location.href='${href}'`}>
     <img src={img} alt={text}>

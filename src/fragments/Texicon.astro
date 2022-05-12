@@ -1,11 +1,17 @@
 ---
-const { title, href } = Astro.props;
-const label = title.charAt(0);
+interface Props {
+    title: string
+    href: string
+}
+
+const { title, href } = Astro.props as Props;
+const label: string = title.charAt(0);
 ---
 <article onclick={`location.href='${href}'`}>
     <h1>{label}</h1>
     <small>{title}</small>
 </article>
+
 <style lang="scss">
 @import '../scss/variables';
 @import '../scss/globals';

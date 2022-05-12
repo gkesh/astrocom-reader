@@ -25,7 +25,7 @@ export async function getStaticPaths() {
     ); 
 }
 
-const { comic } = Astro.request.params;
+const { comic } = Astro.params;
 const {
     data: {
         comic: {

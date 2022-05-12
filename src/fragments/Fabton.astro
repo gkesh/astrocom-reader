@@ -1,7 +1,11 @@
 ---
 import FaIcon from '../icons/FaIcon.vue';
 
-const { icon } = Astro.props;
+interface Props {
+    icon: string
+}
+
+const { icon } = Astro.props as Props;
 ---
 <div>
     <FaIcon

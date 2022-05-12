@@ -49,51 +49,9 @@ form {
             }
         }
     }
-
-    textarea {
-        resize: none;
-        padding: 24px;
-        height: 120px;
-        background: $background-light-b;
-        border: 1px solid transparent;
-        
-        &.big {
-            font-size: 1.1em;
-        }
-
-        &:hover, &:focus {
-            background: white;
-            border: 1px solid $border;
-            outline: none;
-            color: $muted;
-        }
-
-        @media (prefers-color-scheme: dark) {
-            background: $background-dark-b;
-
-            &, &::placeholder, &::-moz-placeholder {
-                color: white;
-            }
-    
-            &:hover, &:focus {
-                background: $background-dark;
-                border-color: $gray-100;
-                color: white;
-            }
-        }
-    }
 }
 
-input, button, textarea, select {
-    height: 50px;
-    margin: 5px;
-    border-radius: var(--border-radius);
-    @extend .transitioner-25;
-}
-
-input[type="text"], input[type="date"] {
-    width: 150px;
-    padding-left: 24px;
+input[type="text"], input[type="date"], input[type="number"], textarea, select {
     background: $background-light-b;
     border: 1px solid transparent;
 
@@ -117,11 +75,6 @@ input[type="text"], input[type="date"] {
         border: 1px solid $border;
         outline: none;
         color: $muted;
-
-        & + div {
-            border: 1px solid $border;
-            border-left: 0px !important;
-        }
     }
 
     @media (prefers-color-scheme: dark) {
@@ -135,7 +88,32 @@ input[type="text"], input[type="date"] {
             background: $background-dark;
             border-color: $gray-100;
             color: white;
+        }
+    }
+}
 
+
+input, button, textarea, select {
+    height: 50px;
+    margin: 5px;
+    padding: 0 24px;
+    border-radius: var(--border-radius);
+    @extend .transitioner-25;
+}
+
+input[type="text"], input[type="date"] {
+    width: 150px;
+    padding-left: 24px;
+
+    &:hover, &:focus {
+        & + div {
+            border: 1px solid $border;
+            border-left: 0px !important;
+        }
+    }
+
+    @media (prefers-color-scheme: dark) {
+        &:hover, &:focus {
             & + div {
                 border-color: $gray-100;
             }
