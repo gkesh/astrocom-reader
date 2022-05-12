@@ -16,12 +16,6 @@ const {
         }
     }
 } = await gqlFetch(getComicTypes());
-
-// Event Handlers
-const testSource = (target: HTMLInputElement) => {
-    const link = target.value;
-    console.log(link);
-}
 ---
 <Base title="New Comic">
     <main class="columned">
@@ -49,7 +43,7 @@ const testSource = (target: HTMLInputElement) => {
                         <input type="date" class="big" name="published">
                         <select name="type" class="big">
                             <option>Select a type</option>
-                            {Array.from(options).map((option) =>
+                            {options.map((option: string) =>
                                 <option>{option}</option>
                             )}
                         </select>
@@ -58,7 +52,7 @@ const testSource = (target: HTMLInputElement) => {
                 <fieldset>
                     <div class="field-row">
                         <Toggler client:load right="Completed" left="Ongoing" />
-                        <input type="text" class="big" name="source" placeholder="Source Link" onblur="testSource(this)" />
+                        <input type="text" class="big" name="source" placeholder="Source Link" />
                     </div>
                 </fieldset>
             </form>
