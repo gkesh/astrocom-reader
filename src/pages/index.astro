@@ -25,7 +25,7 @@ const {
             <img src="/assets/astrocom.png" alt="Logo">
         </section>
         <section class="strip">
-            {comics.map(({title, code}) => (
+            {comics.map(({title, code}: {title: string, code: string}) => (
                 <Texicon title={title} href={`/comics/${code}`} />
             ))}
         </section>

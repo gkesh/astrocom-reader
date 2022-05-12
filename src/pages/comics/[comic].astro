@@ -18,11 +18,18 @@ export async function getStaticPaths() {
 
     if (!comics) window.location.href = "/";
 
-    return comics.map(({code}) => 
+    return comics.map(({code}: {code: string}) => 
         new Object({
             params: { comic: code }
         })
     ); 
+}
+
+// Fetching data
+interface Chapter {
+    visited: boolean
+    checkpoint: boolean
+    number: string
 }
 
 const { comic } = Astro.params;
@@ -52,7 +59,7 @@ const synopsis = data.synopsis;
         </section>
         <section class="chapters">
             {
-                data.chapters.map(({visited, checkpoint, number: chapter}) => 
+                data.chapters.map(({visited, checkpoint, number: chapter}: Chapter) => 
                     <button
                         onclick={`location.href='/comics/${comic}-${chapter}'`}
                         class={(checkpoint? "checkpoint" : (visited? "visited": ""))}>
