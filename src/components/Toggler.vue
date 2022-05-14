@@ -39,6 +39,17 @@ article {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
+    margin: 5px;
+
+    @media screen and (max-width: 1110px) {
+        & {
+            width: 100%;
+
+            button {
+                width: 50%;
+            }
+        }
+    }
 
     button {
         margin: 0;

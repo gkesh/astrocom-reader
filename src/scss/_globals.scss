@@ -195,6 +195,10 @@ button.btn {
     &--secondary {
         @include styledButton($secondary-light, $secondary-dark, $secondary-light-50);
     }
+
+    &--accent {
+        @include styledButton($accent-light, $accent-dark, $accent-light-50);
+    }
 }
 
 main.columned {

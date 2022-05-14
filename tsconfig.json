@@ -4,6 +4,7 @@
     "target": "ESNext",
     "module": "ESNext",
     "strict": true,
+    "allowJs": true,
     "forceConsistentCasingInFileNames": true,
     // Enable node-style module resolution, for things like npm package imports.
     "moduleResolution": "node",
@@ -13,5 +14,8 @@
     "isolatedModules": true,
     // Add type definitions for our Vite runtime.
     "types": ["vite/client"]
+  },
+  "vueCompilerOptions": {
+    "experimentalDisableTemplateSupport": true
   }
 }

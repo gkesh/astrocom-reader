@@ -3,6 +3,7 @@
 import Base from '../layouts/Base.astro';
 import Backton from '../fragments/Backton.astro';
 import Toggler from '../components/Toggler.vue';
+import Tagger from '../components/Tagger.vue';
 
 // Queries
 import { gqlFetch } from '../graphql/client.js';
@@ -51,9 +52,10 @@ const {
                 </fieldset>
                 <fieldset>
                     <div class="field-row">
-                        <Toggler client:load right="Completed" left="Ongoing" />
+                        <Toggler client:idle right="Completed" left="Ongoing" />
                         <input type="text" class="big" name="source" placeholder="Source Link" />
                     </div>
+                    <Tagger client:idle />
                 </fieldset>
             </form>
         </section>
