@@ -13,11 +13,14 @@ export const getComicTitles = () => gql(`
     }
 `);
 
-export const getComicTypes = () => gql(`
-    query getComicTypes {
-        types {
+export const getComicSelects = () => gql(`
+    query getComicSelects {
+        selects {
             status
-            data
+            data {
+                types,
+                crawlers
+            }
             error
         }
     }

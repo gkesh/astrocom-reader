@@ -7,16 +7,19 @@ import Tagger from '../components/Tagger.vue';
 
 // Queries
 import { gqlFetch } from '../graphql/client.js';
-import { getComicTypes } from '../graphql/queries.js';
+import { getComicSelects } from '../graphql/queries.js';
 
 // Query call
 const {
     data: {
-        types: {
-            data: options
+        selects: {
+            data: {
+                types,
+                crawlers
+            }
         }
     }
-} = await gqlFetch(getComicTypes());
+} = await gqlFetch(getComicSelects());
 ---
 <Base title="New Comic">
     <main class="columned">
@@ -41,11 +44,17 @@ const {
                         <textarea name="synopsis" placeholder="Enter Synopsis Here"></textarea>
                     </div>
                     <div class="field-row">
+                        <select name="crawler" class="big">
+                            <option>Select a crawler</option>
+                            {crawlers.map((option: string) =>
+                                <option value={option}>{option}</option>
+                            )}
+                        </select>
                         <input type="date" class="big" name="published">
                         <select name="type" class="big">
                             <option>Select a type</option>
-                            {options.map((option: string) =>
-                                <option>{option}</option>
+                            {types.map((option: string) =>
+                                <option value={option}>{option}</option>
                             )}
                         </select>
                     </div>
@@ -74,6 +83,10 @@ section.forms {
         padding: 24px;
         height: 120px;
         font-size: 1.1em;
+    }
+
+    select {
+        text-transform: capitalize;
     }
 }
 </style>
