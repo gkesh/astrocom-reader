@@ -11,9 +11,9 @@ import Fabton from '../../fragments/Fabton.astro';
 import { arrowUp } from '../../icons/faicons.json';
 
 // Queries
-import { gqlFetch } from '../../graphql/client.js';
-import { getComicChapters, getChapter } from '../../graphql/queries.js';
-import { setVisited, setCheckpoint } from '../../graphql/mutations.js';
+import { gqlFetch } from '../../graphql/client';
+import { getComicChapters, getChapter } from '../../graphql/queries';
+import { setVisited, setCheckpoint } from '../../graphql/mutations';
 
 export async function getStaticPaths() {
     const {
@@ -24,13 +24,18 @@ export async function getStaticPaths() {
         }
     } = await gqlFetch(getComicChapters());
 
-    return [].concat.apply([], [comics.map(({code, count}) => 
+    return [].concat.apply([], [comics.map(({code, count}: {code: string, count: number}) => 
         [...Array(count).keys()].map(i => 
             new Object({params: {comic: code, chapter: `${i + 1}`}})
     ))]); 
 }
 
-const { comic, chapter } = Astro.params;
+type Param = {
+    comic: string,
+    chapter: string
+}
+
+const { comic, chapter }: Param = Astro.params as Param;
 
 let {
     data: {

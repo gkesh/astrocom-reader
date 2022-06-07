@@ -1,6 +1,6 @@
 import { gql } from "./client";
 
-export const setVisited = (comic, chapter) => gql(
+export const setVisited = (comic: string, chapter: number) => gql(
     `
     mutation setVisited ($comic: String!, $chapter: Float!) {
         visited (comic: $comic, chapter: $chapter)
@@ -9,7 +9,7 @@ export const setVisited = (comic, chapter) => gql(
     {comic, chapter}
 )
 
-export const setCheckpoint = (comic, chapter) => gql(
+export const setCheckpoint = (comic: string, chapter: number) => gql(
     `
     mutation setCheckpoint ($comic: String!, $chapter: Float!) {
         checkpoint (comic: $comic, chapter: $chapter)

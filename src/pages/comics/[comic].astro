@@ -4,8 +4,8 @@ import Base from '../../layouts/Base.astro';
 import Backton from '../../fragments/Backton.astro';
 
 // Queries
-import { gqlFetch } from '../../graphql/client.js';
-import { getComic, getComicTitles } from '../../graphql/queries.js';
+import { gqlFetch } from '../../graphql/client';
+import { getComic, getComicTitles } from '../../graphql/queries';
 
 export async function getStaticPaths() {
     const {
@@ -32,7 +32,11 @@ interface Chapter {
     number: string
 }
 
-const { comic } = Astro.params;
+type Param = {
+    comic: string
+}
+
+const { comic }: Param = Astro.params as Param;
 const {
     data: {
         comic: {
