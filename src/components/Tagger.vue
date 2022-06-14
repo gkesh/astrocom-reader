@@ -1,4 +1,5 @@
 <template>
+    <input type="hidden" class="big data" name="tags" :value="value" />
     <div class="field-row">
         <input type="text" class="big" id="tagger" name="tagger" placeholder="Add Genre" />
         <button
@@ -39,10 +40,15 @@ export default defineComponent({
         const buttonSize = "40 30"
 
         const tags = ref([])
+        const value = ref("")
 
         const addTag = () => {
             const tagger = document.querySelector("input#tagger")
-            tags.value?.push(tagger?.value)
+            
+            if (!tags.value.includes(tagger?.value)) {
+                tags.value.push(tagger?.value)
+                value.value = `${value.value},${tagger?.value}`
+            }
 
             // Clearing tagger
             tagger.value = ""
@@ -53,6 +59,7 @@ export default defineComponent({
             buttonSize,
             tag,
             tags,
+            value,
             addTag
         }
     }

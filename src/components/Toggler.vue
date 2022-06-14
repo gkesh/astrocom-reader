@@ -1,5 +1,6 @@
 <template>
     <article>
+        <input type="hidden" class="big data" name="status" :value="status" />
         <button 
             :class="status? 'active': ''"
             @click.prevent="toggle">

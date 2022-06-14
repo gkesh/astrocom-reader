@@ -4,6 +4,7 @@ import Base from '../layouts/Base.astro';
 import Backton from '../fragments/Backton.astro';
 import Toggler from '../components/Toggler.vue';
 import Tagger from '../components/Tagger.vue';
+import Adder from '../components/Adder.vue';
 
 // Queries
 import { gqlFetch } from '../graphql/client';
@@ -33,25 +34,25 @@ const {
             </div>
         </section>
         <section class="forms flex-centered">
-            <form name="add">
+            <Adder client:idle>
                 <fieldset>
                     <div class="field-row">
-                        <input type="text" class="big" name="title" placeholder="Comic Name" />
-                        <input type="text" class="big" name="author" placeholder="Author Name" />
-                        <input type="text" class="big" name="publisher" placeholder="Publisher Name" />
+                        <input type="text" class="big data" name="title" placeholder="Comic Name" />
+                        <input type="text" class="big data" name="author" placeholder="Author Name" />
+                        <input type="text" class="big data" name="publisher" placeholder="Publisher Name" />
                     </div>
                     <div class="field-row">
                         <textarea name="synopsis" placeholder="Enter Synopsis Here"></textarea>
                     </div>
                     <div class="field-row">
-                        <select name="crawler" class="big">
+                        <select name="crawler" class="big data">
                             <option>Select a crawler</option>
                             {crawlers.map((option: string) =>
                                 <option value={option}>{option}</option>
                             )}
                         </select>
-                        <input type="date" class="big" name="published">
-                        <select name="type" class="big">
+                        <input type="date" class="big data" name="published">
+                        <select name="type" class="big data">
                             <option>Select a type</option>
                             {types.map((option: string) =>
                                 <option value={option}>{option}</option>
@@ -61,12 +62,17 @@ const {
                 </fieldset>
                 <fieldset>
                     <div class="field-row">
-                        <input type="text" class="big" name="source" placeholder="Source Link" />
+                        <input type="text" class="big data" name="source" placeholder="Source Link" />
                         <Toggler client:idle right="Completed" left="Ongoing" />
                     </div>
                     <Tagger client:idle />
                 </fieldset>
-            </form>
+                <fieldset>
+                    <div class="field-row">
+                        <button class="btn btn--accent" type="submit">Add Comic</button>
+                    </div>
+                </fieldset>
+            </Adder>
         </section>
     </main>
 </Base>
@@ -87,6 +93,11 @@ section.forms {
 
     select {
         text-transform: capitalize;
+    }
+
+    button {
+        font-size: 1.1em;
+        padding: 24px;
     }
 }
 </style>
