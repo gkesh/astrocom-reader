@@ -3,12 +3,12 @@
         <input type="hidden" class="big data" name="status" :value="status" />
         <button 
             :class="status? 'active': ''"
-            @click.prevent="toggle">
+            @click="toggle($event.target)">
         {{left}}
         </button>
         <button
             :class="status? '': 'active'"
-            @click.prevent="toggle">
+            @click="toggle($event.target)">
         {{right}}
         </button>
     </article>
@@ -22,7 +22,10 @@ export default defineComponent({
     setup() {
         const status = ref(true);
 
-        const toggle = () => status.value = !status.value
+        const toggle = (target) => {
+            if (target.classList.contains("active")) return
+            status.value = !status.value
+        }
 
         return {
             status,

@@ -188,6 +188,10 @@ input[type="text"], input[type="date"] {
 button.btn {
     @extend .flex-centered;
 
+    &--big {
+        height: 70px;
+    }
+
     &--primary {
         @include styledButton($primary-light, $primary-dark, $primary-light-50);
     }

@@ -15,7 +15,7 @@
         <span 
             class="tag tag--accent-dark"
             v-for="(tag, index) in tags"
-            :data-index="index"
+            @click="removeTag(index)"
             :key="tag">
             {{tag}}
         </span>
@@ -42,12 +42,17 @@ export default defineComponent({
         const tags = ref([])
         const value = ref("")
 
+        const removeTag = (index) => {
+            tags.value.splice(index, 1, )
+            value.value = tags.value.join(",")
+        }
+
         const addTag = () => {
             const tagger = document.querySelector("input#tagger")
             
-            if (!tags.value.includes(tagger?.value)) {
+            if (!tags.value.includes(tagger?.value) && tagger?.value !== "") {
                 tags.value.push(tagger?.value)
-                value.value = `${value.value},${tagger?.value}`
+                value.value = tags.value.join(",")
             }
 
             // Clearing tagger
@@ -60,6 +65,7 @@ export default defineComponent({
             tag,
             tags,
             value,
+            removeTag,
             addTag
         }
     }
@@ -84,5 +90,9 @@ input[type="text"] {
 
 button {
     height: 70px;
+}
+
+span {
+    cursor: pointer;
 }
 </style>
