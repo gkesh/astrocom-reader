@@ -5,12 +5,12 @@ class Publisher {
 
     constructor (
         name: string, 
-        country: string = "Japan", 
+        country: string = "N/A", 
         history?: string
     ) {
         this.name = name
         this.country = country
-        this.history = history
+        this.history = history ?? ""
     }
 
     public getName(): string {
@@ -23,6 +23,14 @@ class Publisher {
 
     public getHistory(): string {
         return this.history ?? ""
+    }
+
+    toJSON() {
+        return {
+            name: this.name,
+            country: this.country,
+            history: this.history
+        }
     }
 }
 

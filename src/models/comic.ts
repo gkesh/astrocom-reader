@@ -78,6 +78,20 @@ class Comic {
     public getDatePublished(): Date {
         return this.datePublished
     }
+
+    toJSON() {
+        return {
+            title: this.title,
+            author: JSON.stringify(this.author),
+            publisher: JSON.stringify(this.publisher),
+            crawler: this.crawler,
+            type: this.type,
+            source: this.source,
+            ongoing: this.ongoing,
+            genres: this.genres.map(genre => JSON.stringify(genre)),
+            datePublished: this.datePublished
+        }
+    }
 }
 
 export default Comic

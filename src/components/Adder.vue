@@ -16,13 +16,31 @@ export default defineComponent({
         type FormElement = HTMLInputElement |  HTMLSelectElement | HTMLTextAreaElement;
 
         const save = (target: HTMLFormElement) => {
-            const data = {};
+            const data: any = {}
+
             Array.from(target.elements).filter(
                 (el: Node) => (el as HTMLElement).classList.contains("data")
             ).forEach(
-                (el: Node) => console.log((el as FormElement).name, (el as FormElement).value)
-            );
-        };
+                (el: Node) => data[(el as FormElement).name] = (el as FormElement).value
+            )
+
+            const author: Author = new Author(data["author"])
+            const publisher: Publisher = new Publisher(data["publisher"])
+            const genres: Array<Genre>  = data["tags"].split(",").map((genre: string) => new Genre(genre))
+            const comic: Comic = new Comic(
+                data["title"],
+                author,
+                publisher,
+                data["crawler"],
+                data["type"],
+                data["source"],
+                genres,
+                data["status"],
+                data["published"]
+            )
+
+            console.log(JSON.stringify(comic))
+        }
 
         return {
             save

@@ -14,6 +14,13 @@ class Genre {
     public getDescription(): string {
         return this.description ?? ""
     }
+
+    toJSON() {
+        return {
+            name: this.name,
+            description: this.description
+        }
+    }
 }
 
 export default Genre

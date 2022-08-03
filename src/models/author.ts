@@ -4,7 +4,7 @@ class InvalidAuthorNameError extends Error {
     }
 }
 
-class Author {
+class Author implements Author {
     private firstName: string
     private lastName: string
     private biography?: string
@@ -37,6 +37,7 @@ class Author {
 
             this.firstName = firstName
             this.lastName = lastName
+            this.biography = biography ?? ""
         } else {
             throw new InvalidAuthorNameError()
         }
@@ -52,6 +53,14 @@ class Author {
 
     public getBiography(): string {
         return this.biography ?? ""
+    }
+
+    toJSON() {
+        return {
+            firstName: this.firstName,
+            lastName: this.lastName,
+            biography: this.biography
+        }
     }
 }
 

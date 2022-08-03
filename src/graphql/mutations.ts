@@ -1,4 +1,5 @@
-import { gql } from "./client";
+import { gql } from "./client"
+import Comic from "../models/comic"
 
 export const setVisited = (comic: string, chapter: number) => gql(
     `
@@ -16,4 +17,13 @@ export const setCheckpoint = (comic: string, chapter: number) => gql(
     }
     `,
     {comic, chapter}
+)
+
+export const addComic = (comic: Comic) => gql(
+    `
+    mutation addComic ($comic: Comic!) {
+        add (comic: $comic)
+    }
+    `,
+    {comic: JSON.stringify(comic)}
 )
