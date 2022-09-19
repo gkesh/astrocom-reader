@@ -6,6 +6,12 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+
+// API Calls
+import { gqlFetch } from '../graphql/client'
+import { addComic } from '../graphql/mutations'
+
+// Models
 import Author from '../models/author'
 import Publisher from '../models/publisher'
 import Genre from '../models/genre'
@@ -39,7 +45,9 @@ export default defineComponent({
                 data["published"]
             )
 
-            console.log(JSON.stringify(comic))
+            gqlFetch(addComic(comic)).then(data => {
+                
+            })
         }
 
         return {
