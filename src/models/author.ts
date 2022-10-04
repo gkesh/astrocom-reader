@@ -57,8 +57,8 @@ class Author implements Author {
 
     toJSON() {
         return {
-            firstName: this.firstName,
-            lastName: this.lastName,
+            first_name: this.firstName,
+            last_name: this.lastName,
             biography: this.biography
         }
     }

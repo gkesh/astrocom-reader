@@ -82,14 +82,14 @@ class Comic {
     toJSON() {
         return {
             title: this.title,
-            author: JSON.stringify(this.author),
-            publisher: JSON.stringify(this.publisher),
+            author: this.author,
+            publisher: this.publisher,
             crawler: this.crawler,
             type: this.type,
             source: this.source,
             ongoing: this.ongoing,
-            genres: this.genres.map(genre => JSON.stringify(genre)),
-            datePublished: this.datePublished
+            genres: this.genres,
+            date_published: this.datePublished
         }
     }
 }

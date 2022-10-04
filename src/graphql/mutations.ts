@@ -21,9 +21,9 @@ export const setCheckpoint = (comic: string, chapter: number) => gql(
 
 export const addComic = (comic: Comic) => gql(
     `
-    mutation addComic ($comic: Comic!) {
+    mutation addComic ($comic: ComicInput!) {
         add (comic: $comic)
     }
     `,
-    {comic: JSON.stringify(comic)}
+    {comic}
 )

@@ -33,6 +33,7 @@ export default defineComponent({
             const author: Author = new Author(data["author"])
             const publisher: Publisher = new Publisher(data["publisher"])
             const genres: Array<Genre>  = data["tags"].split(",").map((genre: string) => new Genre(genre))
+            const status: boolean = JSON.parse(data["status"])
             const comic: Comic = new Comic(
                 data["title"],
                 author,
@@ -41,7 +42,7 @@ export default defineComponent({
                 data["type"],
                 data["source"],
                 genres,
-                data["status"],
+                status,
                 data["published"]
             )
 
