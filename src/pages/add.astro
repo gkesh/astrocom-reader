@@ -47,7 +47,7 @@ const {
             <Adder client:idle>
                 <fieldset>
                     <div class="field-row">
-                        <input type="text" class="big data" name="title" placeholder="Comic Name" />
+                        <input type="text" class="big data" name="title" placeholder="Comic Name" required />
                         <input type="text" class="big data" name="author" placeholder="Author Name" />
                         <input type="text" class="big data" name="publisher" placeholder="Publisher Name" />
                     </div>
@@ -61,8 +61,8 @@ const {
                                 <option value={option}>{option}</option>
                             )}
                         </select>
-                        <input type="date" class="big data" name="published">
-                        <select name="type" class="big data">
+                        <input type="date" class="big data" name="published" required>
+                        <select name="type" class="big data" required>
                             <option>Select a type</option>
                             {types.map((option: string) =>
                                 <option value={option}>{option}</option>
@@ -72,7 +72,7 @@ const {
                 </fieldset>
                 <fieldset>
                     <div class="field-row">
-                        <input type="text" class="big data" name="source" placeholder="Source Link" />
+                        <input type="text" class="big data" name="source" placeholder="Source Link" required />
                         <Toggler client:idle right="Completed" left="Ongoing" />
                     </div>
                     <Tagger client:idle />
