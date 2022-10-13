@@ -21,34 +21,35 @@ export default defineComponent({
     setup() {
         type FormElement = HTMLInputElement |  HTMLSelectElement | HTMLTextAreaElement;
 
-        const save = (target: HTMLFormElement) => {
-            const data: any = {}
+        const save = async (target: EventTarget | null) => {
+            if (!target) return;
 
-            Array.from(target.elements).filter(
-                (el: Node) => (el as HTMLElement).classList.contains("data")
+            const formData: any = {}
+
+            Array.from((target as HTMLFormElement).elements).filter(
+                (el: Node) => (el as HTMLElement).classList.contains("formData")
             ).forEach(
-                (el: Node) => data[(el as FormElement).name] = (el as FormElement).value
+                (el: Node) => formData[(el as FormElement).name] = (el as FormElement).value
             )
 
-            const author: Author = new Author(data["author"])
-            const publisher: Publisher = new Publisher(data["publisher"])
-            const genres: Array<Genre>  = data["tags"].split(",").map((genre: string) => new Genre(genre))
-            const status: boolean = JSON.parse(data["status"])
+            const author: Author = new Author(formData["author"])
+            const publisher: Publisher = new Publisher(formData["publisher"])
+            const genres: Array<Genre>  = formData["tags"].split(",").map((genre: string) => new Genre(genre))
+            const ongoing: boolean = JSON.parse(formData["status"])
             const comic: Comic = new Comic(
-                data["title"],
+                formData["title"],
                 author,
                 publisher,
-                data["crawler"],
-                data["type"],
-                data["source"],
+                formData["crawler"],
+                formData["type"],
+                formData["source"],
                 genres,
-                status,
-                data["published"]
+                ongoing,
+                formData["published"]
             )
 
-            gqlFetch(addComic(comic)).then(data => {
-                
-            })
+            const responseData = await gqlFetch(addComic(comic))
+            console.log(responseData)
         }
 
         return {

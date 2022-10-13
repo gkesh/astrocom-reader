@@ -5,6 +5,7 @@ import Backton from '../fragments/Backton.astro';
 import Toggler from '../components/Toggler.vue';
 import Tagger from '../components/Tagger.vue';
 import Adder from '../components/Adder.vue';
+import Dropper from '../components/Dropper.vue';
 
 // Queries
 import { gqlFetch } from '../graphql/client';
@@ -75,6 +76,11 @@ const {
                         <input type="text" class="big data" name="source" placeholder="Source Link" required />
                         <Toggler client:idle right="Completed" left="Ongoing" />
                     </div>
+                    <div class="field-row">
+                        <Dropper name="author" placeholder="Author" />
+                        <Dropper name="publisher" placeholder="Publisher" />
+                        <input type="text" class="big data" name="code" placeholder="Code" required />
+                    </div>
                     <Tagger client:idle />
                 </fieldset>
                 <fieldset>
@@ -89,7 +95,6 @@ const {
 </Base>
 
 <style lang="scss">
-@import "../scss/variables";
 @import "../scss/globals";
 
 section.forms {

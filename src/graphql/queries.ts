@@ -87,3 +87,31 @@ export const getChapter = (comic: string, number: number) => gql(`
         }
     }
 `, {comic, number});
+
+export const searchAuthors = (keyword: string) => gql(`
+    query searchAuthors ($keyword: String!) {
+        search_authors (keyword: $keyword) {
+            status
+            data {
+                id
+                first_name
+                last_name
+            }
+            error
+        }
+    }
+`, {keyword});
+
+export const searchPublishers = (keyword: string) => gql(`
+    query searchPublishers ($keyword: String!) {
+        search_publishers (keyword: $keyword) {
+            status
+            data {
+                id
+                name
+                country
+            }
+            error
+        }
+    }
+`, {keyword});
