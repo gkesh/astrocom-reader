@@ -5,11 +5,14 @@ import Texicon from '../fragments/Texicon.astro';
 
 // Icon
 import FaIcon from '../icons/FaIcon.vue';
-import { lens } from '../icons/faicons.json';
+import { lens, plus } from '../icons/faicons.json';
 
 // Queries
 import { gqlFetch } from '../graphql/client';
 import { getComicTitles } from '../graphql/queries';
+
+// Fragments
+import Fabton from '../fragments/Fabton.astro';
 
 const {
     data: {
@@ -38,6 +41,9 @@ const {
                     draw={lens} />
             </div>
         </section>
+        <div onclick="location.href='/add'">
+            <Fabton icon={plus} />
+        </div>
     </main>
 </Base>
 
