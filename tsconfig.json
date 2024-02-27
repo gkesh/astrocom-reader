@@ -20,6 +20,6 @@
     "./astro.config.mjs"
   ],
   "vueCompilerOptions": {
-    "experimentalDisableTemplateSupport": true
+    // "experimentalDisableTemplateSupport": true
   }
 }
