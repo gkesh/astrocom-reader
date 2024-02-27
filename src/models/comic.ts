@@ -13,33 +13,39 @@ enum ComicType {
 class Comic {
     private title: string
     private author: Author
+    private code: String
     private publisher: Publisher
     private crawler: string
     private type: ComicType
     private source: string
     private ongoing: boolean
     private genres: Array<Genre>
+    private synopsis: String
     private datePublished: Date
 
     constructor (
         title: string, 
-        author: Author, 
+        author: Author,
+        code: String,
         publisher: Publisher, 
         crawler: string, 
         type: ComicType, 
         source: string, 
         genres: Array<Genre>, 
-        ongoing: boolean, 
+        ongoing: boolean,
+        synopsis: String = "N/A",
         datePublished: Date
     ) {
         this.title = title
         this.author = author
+        this.code = code
         this.publisher = publisher
         this.crawler = crawler
         this.type = type
         this.source = source
         this.ongoing = ongoing
         this.genres = genres
+        this.synopsis = synopsis
         this.datePublished = datePublished
     }
 
@@ -49,6 +55,10 @@ class Comic {
 
     public getAuthor(): Author {
         return this.author
+    }
+
+    public getCode(): String {
+        return this.code
     }
 
     public getPublisher(): Publisher {
@@ -75,6 +85,10 @@ class Comic {
         return this.genres
     }
 
+    public getSynopsis(): String {
+        return this.synopsis
+    }
+
     public getDatePublished(): Date {
         return this.datePublished
     }
@@ -83,12 +97,14 @@ class Comic {
         return {
             title: this.title,
             author: this.author,
+            code: this.code,
             publisher: this.publisher,
             crawler: this.crawler,
             type: this.type,
             source: this.source,
             ongoing: this.ongoing,
             genres: this.genres,
+            synopsis: this.synopsis,
             date_published: this.datePublished
         }
     }

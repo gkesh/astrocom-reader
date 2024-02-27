@@ -27,7 +27,7 @@ export default defineComponent({
             const formData: any = {}
 
             Array.from((target as HTMLFormElement).elements).filter(
-                (el: Node) => (el as HTMLElement).classList.contains("formData")
+                (el: Node) => (el as HTMLElement).classList.contains("data")
             ).forEach(
                 (el: Node) => formData[(el as FormElement).name] = (el as FormElement).value
             )
@@ -39,17 +39,18 @@ export default defineComponent({
             const comic: Comic = new Comic(
                 formData["title"],
                 author,
+                formData["code"],
                 publisher,
                 formData["crawler"],
                 formData["type"],
                 formData["source"],
                 genres,
                 ongoing,
+                formData["synopsis"],
                 formData["published"]
             )
 
             const responseData = await gqlFetch(addComic(comic))
-            console.log(responseData)
         }
 
         return {

@@ -63,13 +63,15 @@ const synopsis = data.synopsis;
         </section>
         <section class="chapters">
             {
+                data.chapters.length > 0 ?
                 data.chapters.map(({visited, checkpoint, number: chapter}: Chapter) => 
                     <button
                         onclick={`location.href='/comics/${comic}-${chapter}'`}
                         class={(checkpoint? "checkpoint" : (visited? "visited": ""))}>
                         Chapter &nbsp; {chapter}
                     </button>
-                )
+                ) :
+                <p>No chapters downloaded &nbsp; <span>:(</span></p>
             }
         </section>
     </main>
@@ -86,6 +88,18 @@ section.chapters {
     grid-template-columns: repeat(8, 1fr);
     padding: 5rem 2rem;
     overflow-y: auto;
+    position: relative;
+
+    p {
+        font-style: italic;
+        position: absolute;
+        top: 40%;
+        left: 40%;
+
+        span {
+            color: $accent-dark;
+        }
+    }
 
     @media screen and (max-width: 1600px) {
         & {
