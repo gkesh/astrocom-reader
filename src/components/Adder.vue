@@ -22,7 +22,7 @@ export default defineComponent({
         type FormElement = HTMLInputElement |  HTMLSelectElement | HTMLTextAreaElement;
 
         const save = async (target: EventTarget | null) => {
-            if (!target) return;
+            if (!target) return
 
             const formData: any = {}
 

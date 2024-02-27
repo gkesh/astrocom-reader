@@ -136,6 +136,10 @@ input[type="text"], input[type="date"] {
     }
 }
 
+main {
+    position: relative;
+}
+
 .flex-centered {
     display: flex;
     align-items: center;
