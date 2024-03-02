@@ -1,15 +1,15 @@
 ---
 // Components
-import Base from '../layouts/Base.astro';
-import Backton from '../fragments/Backton.astro';
-import Toggler from '../components/Toggler.vue';
-import Tagger from '../components/Tagger.vue';
-import Adder from '../components/Adder.vue';
-import Dropper from '../components/Dropper.vue';
+import Base from '../../layouts/Base.astro';
+import Backton from '../../fragments/Backton.astro';
+import Toggler from '../../components/Toggler.vue';
+import Tagger from '../../components/Tagger.vue';
+import Adder from '../../components/Adder.vue';
+import Dropper from '../../components/Dropper.vue';
 
 // Queries
-import { gqlFetch } from '../graphql/client';
-import { getComicSelects } from '../graphql/queries';
+import { gqlFetch } from '../../graphql/client';
+import { getComicSelects } from '../../graphql/queries';
 
 // Query call
 const {
@@ -44,7 +44,7 @@ const {
                 </p>
             </div>
         </section>
-        <section class="forms flex-centered">
+        <section class="forms flex-centered overflow-y-auto">
             <Adder client:idle>
                 <fieldset>
                     <div class="field-row">
@@ -93,7 +93,7 @@ const {
 </Base>
 
 <style lang="scss">
-@import "../scss/globals";
+@import "../../scss/globals";
 
 section.forms {
     flex: 3;

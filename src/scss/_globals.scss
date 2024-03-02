@@ -140,6 +140,48 @@ main {
     position: relative;
 }
 
+.overflow {
+  &-auto {
+    overflow: auto;
+  }
+  
+  &-hidden {
+    overflow: hidden;
+  }
+
+  &-scroll {
+    overflow: scroll;
+  }
+
+  &-x {
+    &-auto {
+        overflow-x: auto;
+    }
+    
+    &-hidden {
+        overflow-x: hidden;
+    }
+
+    &-scroll {
+        overflow-x: scroll;
+    }
+  }
+
+  &-y {
+    &-auto {
+        overflow-y: auto;
+    }
+    
+    &-hidden {
+        overflow-y: hidden;
+    }
+
+    &-scroll {
+        overflow-y: scroll;
+    }
+  }
+}
+
 .flex-centered {
     display: flex;
     align-items: center;

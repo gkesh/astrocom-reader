@@ -1,19 +1,19 @@
 ---
 // Components
-import Base from '../../layouts/Base.astro';
-import Jumper from '../../components/Jumper.vue';
-import Skipper from '../../components/Skipper.vue';
-import Viewer from '../../components/Viewer.vue';
-import Chapton from '../../fragments/Chapton.astro';
-import Fabton from '../../fragments/Fabton.astro';
+import Base from '../../../layouts/Base.astro';
+import Jumper from '../../../components/Jumper.vue';
+import Skipper from '../../../components/Skipper.vue';
+import Viewer from '../../../components/Viewer.vue';
+import Chapton from '../../../fragments/Chapton.astro';
+import Fabton from '../../../fragments/Fabton.astro';
 
 // Icons
-import { arrowUp } from '../../icons/faicons.json';
+import { arrowUp } from '../../../icons/faicons.json';
 
 // Queries
-import { gqlFetch } from '../../graphql/client';
-import { getComicChapters, getChapter } from '../../graphql/queries';
-import { setVisited, setCheckpoint } from '../../graphql/mutations';
+import { gqlFetch } from '../../../graphql/client';
+import { getComicChapters, getChapter } from '../../../graphql/queries';
+import { setVisited, setCheckpoint } from '../../../graphql/mutations';
 
 export async function getStaticPaths() {
     const {
@@ -93,7 +93,7 @@ const pages = [...Array(count + 1).keys()].map(i => `/library/${comic}/chapter_$
 </Base>
 
 <style lang="scss">
-@import "../../scss/variables";
+@import "../../../scss/variables";
 
 header {
     background-color: white;

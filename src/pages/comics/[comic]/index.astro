@@ -1,11 +1,15 @@
 ---
 // Components
-import Base from '../../layouts/Base.astro';
-import Backton from '../../fragments/Backton.astro';
+import Base from '../../../layouts/Base.astro';
+import Backton from '../../../fragments/Backton.astro';
+import Fabton from '../../../fragments/Fabton.astro';
 
 // Queries
-import { gqlFetch } from '../../graphql/client';
-import { getComic, getComicTitles } from '../../graphql/queries';
+import { gqlFetch } from '../../../graphql/client';
+import { getComic, getComicTitles } from '../../../graphql/queries';
+
+// Icons
+import { download } from '../../../icons/faicons.json';
 
 export async function getStaticPaths() {
     const {
@@ -66,7 +70,7 @@ const synopsis = data.synopsis;
                 data.chapters.length > 0 ?
                 data.chapters.map(({visited, checkpoint, number: chapter}: Chapter) => 
                     <button
-                        onclick={`location.href='/comics/${comic}-${chapter}'`}
+                        onclick={`location.href='/${comic}/${chapter}'`}
                         class={(checkpoint? "checkpoint" : (visited? "visited": ""))}>
                         Chapter &nbsp; {chapter}
                     </button>
@@ -74,12 +78,15 @@ const synopsis = data.synopsis;
                 <p>No chapters downloaded &nbsp; <span>:(</span></p>
             }
         </section>
+        <div>
+            <Fabton icon={download} />
+        </div>
     </main>
 </Base>
 
 <style lang="scss">
-@import '../../scss/variables';
-@import '../../scss/globals';
+@import '../../../scss/variables';
+@import '../../../scss/globals';
 
 section.chapters {
     flex: 3;
