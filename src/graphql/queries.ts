@@ -115,3 +115,15 @@ export const searchPublishers = (keyword: string) => gql(`
         }
     }
 `, {keyword});
+
+export const downloadChapters = (comic: string) => gql(`
+    query downloadChapters ($comic: String!) {
+        download_chapters (comic: $comic) {
+            number
+            title
+            date_released
+            source
+            pages
+        }
+    }
+`, {comic});
